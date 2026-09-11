@@ -2,7 +2,7 @@
 
 services:
   postgres:
-    image: postgres:17
+    image: pgvector/pgvector:pg17
     container_name: competitor-postgres
     restart: always
 
@@ -16,6 +16,7 @@ services:
 
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
 
     networks:
       - competitor-network
